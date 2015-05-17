@@ -1,17 +1,44 @@
 package it.nicopasso.espressodemo;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
+
+    private EditText mNameEdit;
+    private Button mNextButton;
+
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        context = this;
+
+        mNameEdit = (EditText) findViewById(R.id.name_edit);
+        mNextButton = (Button) findViewById(R.id.next_button);
+
+        mNextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, SecondActivity.class);
+                intent.putExtra("person_name", mNameEdit.getText().toString());
+                startActivity(intent);
+
+            }
+        });
+
     }
 
     @Override
